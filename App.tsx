@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Home from './pages/Home';
 import NewListing from './pages/NewListing';
 import RefurbishedListing from './pages/RefurbishedListing';
@@ -68,6 +69,7 @@ const App: React.FC = () => {
             <CartProvider>
                 <HashRouter>
                     <Layout>
+                        <SpeedInsights />
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/smartphones" element={<CategoryListing categoryType="smartphones" />} />
