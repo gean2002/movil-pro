@@ -320,94 +320,106 @@ const Home: React.FC = () => {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {/* Card 1 */}
-            <RevealOnScroll delay={100} className="group relative bg-white rounded-[2rem] p-6 transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-[#faaf00]/30 hover:-translate-y-2">
+            <RevealOnScroll delay={100} className="group relative bg-white rounded-[2rem] p-4 md:p-6 transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-[#faaf00]/30 hover:-translate-y-2">
               <div className="absolute top-4 right-4 z-10">
                 <span className="bg-[#faaf00] text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow-sm">AHORRA S/ 330</span>
               </div>
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6 bg-gray-50 group-hover:bg-[#faaf00]/5 transition-colors duration-500">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-4 md:mb-6 bg-gray-50 group-hover:bg-[#faaf00]/5 transition-colors duration-500">
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <img
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd9-FWZQD33v-L-xGQ_-q51m8C5U5uVKRzN6yf0AW5Yj5PyMp5Aaw9DVjd3NUf3Cb-4Kwole2A5on0Wv9J4x0SGEafIS189TgSu0ubZuoeh11FxlXMEOzqlJJ3pD74j-PiF3OcXdTyarlgwljIwj_Ds-CeG1iMeRdn92E1_8WdZ6egv8nt4lZa673Um4J3lrWnGypWV92nnEl-sZ0RiznNv-PrLNyrakv852xt42rZKNvy6dEr28I4G9Wg8u18BEemuE5311I8k19l"
                   alt="iPhone 14 Pro"
-                  className="w-full h-full object-contain p-6 mix-blend-multiply transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
+                  className="w-full h-full object-contain p-4 md:p-6 mix-blend-multiply transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
                 />
               </div>
               <div className="space-y-2">
-                <h3 className="text-lg font-bold text-[#1d1d1f] group-hover:text-[#faaf00] transition-colors">iPhone 14 Pro</h3>
-                <div className="flex items-baseline gap-3">
-                  <span className="text-2xl font-black text-[#1d1d1f]">S/ 989</span>
-                  <span className="text-sm text-gray-400 line-through decoration-1">S/ 1.319</span>
+                <h3 className="text-base md:text-lg font-bold text-[#1d1d1f] group-hover:text-[#faaf00] transition-colors leading-tight">iPhone 14 Pro</h3>
+                <div className="flex flex-col gap-0.5">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-[10px] md:text-xs font-bold text-[#a5be31]">S/</span>
+                    <span className="text-lg md:text-xl font-black text-[#1d1d1f]">989</span>
+                  </div>
+                  <span className="text-xs text-gray-400 line-through decoration-1">S/ 1.319</span>
                 </div>
-                <button onClick={(e) => { e.preventDefault(); addToCart({ id: 'iphone-14-pro-refurb', name: 'iPhone 14 Pro (Reacondicionado)', price: 989, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCd9-FWZQD33v-L-xGQ_-q51m8C5U5uVKRzN6yf0AW5Yj5PyMp5Aaw9DVjd3NUf3Cb-4Kwole2A5on0Wv9J4x0SGEafIS189TgSu0ubZuoeh11FxlXMEOzqlJJ3pD74j-PiF3OcXdTyarlgwljIwj_Ds-CeG1iMeRdn92E1_8WdZ6egv8nt4lZa673Um4J3lrWnGypWV92nnEl-sZ0RiznNv-PrLNyrakv852xt42rZKNvy6dEr28I4G9Wg8u18BEemuE5311I8k19l', color: 'Deep Purple', storage: '128GB', condition: 'Reacondicionado' }); }} className="w-full mt-2 py-2 rounded-xl bg-[#1d1d1f] text-white font-bold text-sm hover:bg-[#a5be31] hover:text-black transition-colors shadow-md">Añadir</button>
+                <button onClick={(e) => { e.preventDefault(); addToCart({ id: 'iphone-14-pro-refurb', name: 'iPhone 14 Pro (Reacondicionado)', price: 989, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCd9-FWZQD33v-L-xGQ_-q51m8C5U5uVKRzN6yf0AW5Yj5PyMp5Aaw9DVjd3NUf3Cb-4Kwole2A5on0Wv9J4x0SGEafIS189TgSu0ubZuoeh11FxlXMEOzqlJJ3pD74j-PiF3OcXdTyarlgwljIwj_Ds-CeG1iMeRdn92E1_8WdZ6egv8nt4lZa673Um4J3lrWnGypWV92nnEl-sZ0RiznNv-PrLNyrakv852xt42rZKNvy6dEr28I4G9Wg8u18BEemuE5311I8k19l', color: 'Deep Purple', storage: '128GB', condition: 'Reacondicionado' }); }} className="w-full mt-2 py-2.5 rounded-xl bg-[#1d1d1f] text-white font-bold text-xs md:text-sm hover:bg-[#a5be31] hover:text-black transition-colors shadow-md active:scale-95">Añadir</button>
               </div>
             </RevealOnScroll>
 
             {/* Card 2 */}
-            <RevealOnScroll delay={200} className="group relative bg-white rounded-[2rem] p-6 transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-[#faaf00]/30 hover:-translate-y-2">
+            <RevealOnScroll delay={200} className="group relative bg-white rounded-[2rem] p-4 md:p-6 transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-[#faaf00]/30 hover:-translate-y-2">
               <div className="absolute top-4 right-4 z-10">
                 <span className="bg-black/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow-sm">POPULAR</span>
               </div>
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6 bg-gray-50 group-hover:bg-[#faaf00]/5 transition-colors duration-500">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-4 md:mb-6 bg-gray-50 group-hover:bg-[#faaf00]/5 transition-colors duration-500">
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <img
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2MKSoFYqDJXSQujOPjKrRCjUGMdfBWzqnJN_0XWvNoh0AbWTxZqggfiWAkQiNjz7UQq7bicYKcKld25Y_-xAw-kOM6ndchpPdQfD6ec6C21yNCva99SRUYdSKnzlxQcuMTQ7wQ_UYVfsuB5J2eJBMexLvIDkBBmNPZFd2gsDklXvRbrUc5y7ECeB47RWEklPRhINa_cgyZO-b74doNFx0zza6D8451Yo01HjmzUXoOSHWw1rc6CtSbLlaGz69P8448YOILFKJLhV0"
                   alt="iPhone 13"
-                  className="w-full h-full object-contain p-6 mix-blend-multiply transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3"
+                  className="w-full h-full object-contain p-4 md:p-6 mix-blend-multiply transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3"
                 />
               </div>
               <div className="space-y-2">
-                <h3 className="text-lg font-bold text-[#1d1d1f] group-hover:text-[#faaf00] transition-colors">iPhone 13</h3>
-                <div className="flex items-baseline gap-3">
-                  <span className="text-2xl font-black text-[#1d1d1f]">S/ 549</span>
-                  <span className="text-sm text-gray-400 line-through decoration-1">S/ 899</span>
+                <h3 className="text-base md:text-lg font-bold text-[#1d1d1f] group-hover:text-[#faaf00] transition-colors leading-tight">iPhone 13</h3>
+                <div className="flex flex-col gap-0.5">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-[10px] md:text-xs font-bold text-[#a5be31]">S/</span>
+                    <span className="text-lg md:text-xl font-black text-[#1d1d1f]">549</span>
+                  </div>
+                  <span className="text-xs text-gray-400 line-through decoration-1">S/ 899</span>
                 </div>
-                <button onClick={(e) => { e.preventDefault(); addToCart({ id: 'iphone-13-refurb', name: 'iPhone 13 (Reacondicionado)', price: 549, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA2MKSoFYqDJXSQujOPjKrRCjUGMdfBWzqnJN_0XWvNoh0AbWTxZqggfiWAkQiNjz7UQq7bicYKcKld25Y_-xAw-kOM6ndchpPdQfD6ec6C21yNCva99SRUYdSKnzlxQcuMTQ7wQ_UYVfsuB5J2eJBMexLvIDkBBmNPZFd2gsDklXvRbrUc5y7ECeB47RWEklPRhINa_cgyZO-b74doNFx0zza6D8451Yo01HjmzUXoOSHWw1rc6CtSbLlaGz69P8448YOILFKJLhV0', color: 'Midnight', storage: '128GB', condition: 'Reacondicionado' }); }} className="w-full mt-2 py-2 rounded-xl bg-[#1d1d1f] text-white font-bold text-sm hover:bg-[#a5be31] hover:text-black transition-colors shadow-md">Añadir</button>
+                <button onClick={(e) => { e.preventDefault(); addToCart({ id: 'iphone-13-refurb', name: 'iPhone 13 (Reacondicionado)', price: 549, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA2MKSoFYqDJXSQujOPjKrRCjUGMdfBWzqnJN_0XWvNoh0AbWTxZqggfiWAkQiNjz7UQq7bicYKcKld25Y_-xAw-kOM6ndchpPdQfD6ec6C21yNCva99SRUYdSKnzlxQcuMTQ7wQ_UYVfsuB5J2eJBMexLvIDkBBmNPZFd2gsDklXvRbrUc5y7ECeB47RWEklPRhINa_cgyZO-b74doNFx0zza6D8451Yo01HjmzUXoOSHWw1rc6CtSbLlaGz69P8448YOILFKJLhV0', color: 'Midnight', storage: '128GB', condition: 'Reacondicionado' }); }} className="w-full mt-2 py-2.5 rounded-xl bg-[#1d1d1f] text-white font-bold text-xs md:text-sm hover:bg-[#a5be31] hover:text-black transition-colors shadow-md active:scale-95">Añadir</button>
               </div>
             </RevealOnScroll>
 
             {/* Card 3 */}
-            <RevealOnScroll delay={300} className="group relative bg-white rounded-[2rem] p-6 transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-[#faaf00]/30 hover:-translate-y-2">
+            <RevealOnScroll delay={300} className="group relative bg-white rounded-[2rem] p-4 md:p-6 transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-[#faaf00]/30 hover:-translate-y-2">
               <div className="absolute top-4 right-4 z-10">
                 <span className="bg-[#faaf00] text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow-sm">-40%</span>
               </div>
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6 bg-gray-50 group-hover:bg-[#faaf00]/5 transition-colors duration-500">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-4 md:mb-6 bg-gray-50 group-hover:bg-[#faaf00]/5 transition-colors duration-500">
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <img
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCh5jg8-fAIbQsF1oIqzLKTrusVirHcdtevI6vBUpKZrGNZxosZs19KgeYcwkDAD0LF1jCPiWKLJgO8reLmXvbo9fPPwlX-4L_UaDvavQ9jbnyo7jMSjIePEe7wJVhiH0KcB-SCzkxCbGclnA3ggYpg48SUMYtL4AhEef5l2sClWpb0sM82kR-eCu9ltOD7cCCcLL6vW9LMenkwQQ4R69UQv2Rxx5psOoI9quMpKHrrUok4sp283ByTCFlF9mSz1j3peheDXzAv0C9"
                   alt="iPhone 13 Mini"
-                  className="w-full h-full object-contain p-6 mix-blend-multiply transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
+                  className="w-full h-full object-contain p-4 md:p-6 mix-blend-multiply transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
                 />
               </div>
               <div className="space-y-2">
-                <h3 className="text-lg font-bold text-[#1d1d1f] group-hover:text-[#faaf00] transition-colors">iPhone 13 Mini</h3>
-                <div className="flex items-baseline gap-3">
-                  <span className="text-2xl font-black text-[#1d1d1f]">S/ 499</span>
-                  <span className="text-sm text-gray-400 line-through decoration-1">S/ 809</span>
+                <h3 className="text-base md:text-lg font-bold text-[#1d1d1f] group-hover:text-[#faaf00] transition-colors leading-tight">iPhone 13 Mini</h3>
+                <div className="flex flex-col gap-0.5">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-[10px] md:text-xs font-bold text-[#a5be31]">S/</span>
+                    <span className="text-lg md:text-xl font-black text-[#1d1d1f]">499</span>
+                  </div>
+                  <span className="text-xs text-gray-400 line-through decoration-1">S/ 809</span>
                 </div>
-                <button onClick={(e) => { e.preventDefault(); addToCart({ id: 'iphone-13-mini-refurb', name: 'iPhone 13 Mini (Reacondicionado)', price: 499, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBCh5jg8-fAIbQsF1oIqzLKTrusVirHcdtevI6vBUpKZrGNZxosZs19KgeYcwkDAD0LF1jCPiWKLJgO8reLmXvbo9fPPwlX-4L_UaDvavQ9jbnyo7jMSjIePEe7wJVhiH0KcB-SCzkxCbGclnA3ggYpg48SUMYtL4AhEef5l2sClWpb0sM82kR-eCu9ltOD7cCCcLL6vW9LMenkwQQ4R69UQv2Rxx5psOoI9quMpKHrrUok4sp283ByTCFlF9mSz1j3peheDXzAv0C9', color: 'Blue', storage: '128GB', condition: 'Reacondicionado' }); }} className="w-full mt-2 py-2 rounded-xl bg-[#1d1d1f] text-white font-bold text-sm hover:bg-[#a5be31] hover:text-black transition-colors shadow-md">Añadir</button>
+                <button onClick={(e) => { e.preventDefault(); addToCart({ id: 'iphone-13-mini-refurb', name: 'iPhone 13 Mini (Reacondicionado)', price: 499, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBCh5jg8-fAIbQsF1oIqzLKTrusVirHcdtevI6vBUpKZrGNZxosZs19KgeYcwkDAD0LF1jCPiWKLJgO8reLmXvbo9fPPwlX-4L_UaDvavQ9jbnyo7jMSjIePEe7wJVhiH0KcB-SCzkxCbGclnA3ggYpg48SUMYtL4AhEef5l2sClWpb0sM82kR-eCu9ltOD7cCCcLL6vW9LMenkwQQ4R69UQv2Rxx5psOoI9quMpKHrrUok4sp283ByTCFlF9mSz1j3peheDXzAv0C9', color: 'Blue', storage: '128GB', condition: 'Reacondicionado' }); }} className="w-full mt-2 py-2.5 rounded-xl bg-[#1d1d1f] text-white font-bold text-xs md:text-sm hover:bg-[#a5be31] hover:text-black transition-colors shadow-md active:scale-95">Añadir</button>
               </div>
             </RevealOnScroll>
 
             {/* Card 4 */}
-            <RevealOnScroll delay={400} className="group relative bg-white rounded-[2rem] p-6 transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-[#faaf00]/30 hover:-translate-y-2">
+            <RevealOnScroll delay={400} className="group relative bg-white rounded-[2rem] p-4 md:p-6 transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-[#faaf00]/30 hover:-translate-y-2">
               <div className="absolute top-4 right-4 z-10">
                 <span className="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-md border border-gray-200">BÁSICO</span>
               </div>
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6 bg-gray-50 group-hover:bg-[#faaf00]/5 transition-colors duration-500">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-4 md:mb-6 bg-gray-50 group-hover:bg-[#faaf00]/5 transition-colors duration-500">
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <img
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw8XkQ_1ARRb0_aJxZmbHyhxv_mjc9emcJ8ofZqDmOAQo-7E-sLt30ajOeoCr3tT12DxDhbZoQC0lbe0581Z3aVkERGhIfz8fl2Pa9MIClwjH3ZLcOUU-Wfs7_ACcYVkQymlgEMMiGVft-hqyD-KyHfaK7AWPyKWT-mjZm9nZSHy3JHmDtf9p8McLIbs7XLFJoEgjiGCVs70Pgmc6bZbbq5zGUi6uvvEBtQz_z6dy_qnEe5g-VCy8_lwsBvwk_-Ksiqz7vcvjcgFlt"
                   alt="iPhone 12"
-                  className="w-full h-full object-contain p-6 mix-blend-multiply transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3"
+                  className="w-full h-full object-contain p-4 md:p-6 mix-blend-multiply transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3"
                 />
               </div>
               <div className="space-y-2">
-                <h3 className="text-lg font-bold text-[#1d1d1f] group-hover:text-[#faaf00] transition-colors">iPhone 12</h3>
-                <div className="flex items-baseline gap-3">
-                  <span className="text-2xl font-black text-[#1d1d1f]">S/ 399</span>
-                  <span className="text-sm text-gray-400 line-through decoration-1">S/ 759</span>
+                <h3 className="text-base md:text-lg font-bold text-[#1d1d1f] group-hover:text-[#faaf00] transition-colors leading-tight">iPhone 12</h3>
+                <div className="flex flex-col gap-0.5">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-[10px] md:text-xs font-bold text-[#a5be31]">S/</span>
+                    <span className="text-lg md:text-xl font-black text-[#1d1d1f]">399</span>
+                  </div>
+                  <span className="text-xs text-gray-400 line-through decoration-1">S/ 759</span>
                 </div>
-                <button onClick={(e) => { e.preventDefault(); addToCart({ id: 'iphone-12-refurb', name: 'iPhone 12 (Reacondicionado)', price: 399, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDw8XkQ_1ARRb0_aJxZmbHyhxv_mjc9emcJ8ofZqDmOAQo-7E-sLt30ajOeoCr3tT12DxDhbZoQC0lbe0581Z3aVkERGhIfz8fl2Pa9MIClwjH3ZLcOUU-Wfs7_ACcYVkQymlgEMMiGVft-hqyD-KyHfaK7AWPyKWT-mjZm9nZSHy3JHmDtf9p8McLIbs7XLFJoEgjiGCVs70Pgmc6bZbbq5zGUi6uvvEBtQz_z6dy_qnEe5g-VCy8_lwsBvwk_-Ksiqz7vcvjcgFlt', color: 'Purple', storage: '64GB', condition: 'Reacondicionado' }); }} className="w-full mt-2 py-2 rounded-xl bg-[#1d1d1f] text-white font-bold text-sm hover:bg-[#a5be31] hover:text-black transition-colors shadow-md">Añadir</button>
+                <button onClick={(e) => { e.preventDefault(); addToCart({ id: 'iphone-12-refurb', name: 'iPhone 12 (Reacondicionado)', price: 399, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDw8XkQ_1ARRb0_aJxZmbHyhxv_mjc9emcJ8ofZqDmOAQo-7E-sLt30ajOeoCr3tT12DxDhbZoQC0lbe0581Z3aVkERGhIfz8fl2Pa9MIClwjH3ZLcOUU-Wfs7_ACcYVkQymlgEMMiGVft-hqyD-KyHfaK7AWPyKWT-mjZm9nZSHy3JHmDtf9p8McLIbs7XLFJoEgjiGCVs70Pgmc6bZbbq5zGUi6uvvEBtQz_z6dy_qnEe5g-VCy8_lwsBvwk_-Ksiqz7vcvjcgFlt', color: 'Purple', storage: '64GB', condition: 'Reacondicionado' }); }} className="w-full mt-2 py-2.5 rounded-xl bg-[#1d1d1f] text-white font-bold text-xs md:text-sm hover:bg-[#a5be31] hover:text-black transition-colors shadow-md active:scale-95">Añadir</button>
               </div>
             </RevealOnScroll>
           </div>
