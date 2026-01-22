@@ -47,6 +47,35 @@ const RevealOnScroll: React.FC<{ children: React.ReactNode; className?: string; 
 
 const Home: React.FC = () => {
   const { addToCart } = useCart();
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [
+    {
+      desktop: '/images/hero-home-v6.jpg',
+      mobile: '/images/hero-mobile-destino.jpg'
+    },
+    {
+      desktop: '/images/hero-home-slider-2.jpg',
+      mobile: '/images/hero-mobile-iphone.jpg'
+    }
+  ];
+
+  useEffect(() => {
+    const slideInterval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
+    return () => clearInterval(slideInterval);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
+
   return (
     <div className="flex flex-col w-full overflow-x-hidden bg-white">
 
@@ -57,11 +86,38 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       {/* Mobile Design: Image stack + Content below */}
       <div className="block md:hidden w-full bg-[#f5f5f7]">
-        <img
-          src="/images/hero-new.jpg"
-          alt="Movil Pro Tienda"
-          className="w-full h-auto object-contain shadow-sm"
-        />
+        <div className="relative group">
+          <img
+            src={slides[currentSlide].mobile}
+            alt="Movil Pro Tienda"
+            className="w-full max-w-[438px] mx-auto h-[365px] object-cover shadow-sm transition-opacity duration-1000"
+          />
+          {/* Mobile Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-1 rounded-full backdrop-blur-sm transition-colors"
+          >
+            <span className="material-symbols-outlined text-2xl">chevron_left</span>
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-1 rounded-full backdrop-blur-sm transition-colors"
+          >
+            <span className="material-symbols-outlined text-2xl">chevron_right</span>
+          </button>
+          {/* Mobile Dots */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-2 h-2 rounded-full transition-all ${index === currentSlide ? 'bg-white w-4' : 'bg-white/50'
+                  }`}
+              />
+            ))}
+          </div>
+        </div>
+
         <div className="px-6 py-8 text-center bg-[#f5f5f7] text-[#1d1d1f] -mt-2 relative z-10">
           <span className="inline-block px-3 py-1 rounded-full bg-[#a5be31]/20 border border-[#a5be31] text-[#6d8015] font-bold text-[10px] uppercase tracking-widest mb-4 backdrop-blur-md">
             Garantía Móvil Pro
@@ -93,43 +149,38 @@ const Home: React.FC = () => {
       </div>
 
       {/* Desktop Design: Immersive Background Cover */}
-      <section className="hidden md:block relative w-full h-[550px] overflow-hidden group">
+      <section className="hidden md:block relative w-full aspect-[1920/640] overflow-hidden group">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 group-hover:scale-105"
-          style={{ backgroundImage: "url('/images/hero-new.jpg')" }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 group-hover:scale-105"
+          style={{ backgroundImage: `url('${slides[currentSlide].desktop}')` }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent"></div>
+
         </div>
 
-        <div className="relative z-10 h-full max-w-[1200px] mx-auto px-6 flex flex-col justify-center items-start text-[#1d1d1f]">
-          <RevealOnScroll>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[#a5be31]/20 border border-[#a5be31] text-[#a5be31] font-bold text-xs uppercase tracking-widest mb-6 backdrop-blur-md">
-              Garantía Móvil Pro
-            </span>
-            <h1 className="text-6xl lg:text-7xl font-black mb-6 leading-tight drop-shadow-lg">
-              Tecnología <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a5be31] to-emerald-400">en tus manos</span>
-            </h1>
-            <p className="text-xl lg:text-2xl font-medium max-w-xl mb-10 text-gray-700 leading-relaxed">
-              Tu destino premium para smartphones, tablets y servicio técnico especializado.
-            </p>
-            <div className="flex gap-4">
-              <Link
-                to="/smartphones"
-                className="inline-flex items-center gap-2 bg-[#a5be31] text-black px-6 py-3 rounded-xl font-bold text-base hover:bg-white hover:scale-105 transition-all shadow-lg"
-              >
-                Ver Catálogo
-                <span className="material-symbols-outlined filled text-[20px]">grid_view</span>
-              </Link>
-              <Link
-                to="/service"
-                className="inline-flex items-center gap-2 bg-white/10 text-white backdrop-blur-md border border-white/20 px-6 py-3 rounded-xl font-bold text-base hover:bg-white/20 transition-all hover:border-white/40"
-              >
-                Servicio Técnico
-                <span className="material-symbols-outlined text-[20px]">build</span>
-              </Link>
-            </div>
-          </RevealOnScroll>
+        {/* Desktop Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-md transition-all opacity-0 group-hover:opacity-100"
+        >
+          <span className="material-symbols-outlined text-4xl">chevron_left</span>
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-md transition-all opacity-0 group-hover:opacity-100"
+        >
+          <span className="material-symbols-outlined text-4xl">chevron_right</span>
+        </button>
+
+        {/* Desktop Dots */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`h-1.5 rounded-full transition-all ${index === currentSlide ? 'bg-white w-8' : 'bg-white/50 w-4 hover:bg-white/80'
+                }`}
+            />
+          ))}
         </div>
       </section>
 

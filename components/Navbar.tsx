@@ -214,6 +214,9 @@ const Navbar: React.FC = () => {
               <Link to={isAuthenticated ? "/account" : "/login"} className="hidden sm:flex text-[11px] font-bold text-[#1d1d1f] hover:text-black uppercase tracking-wide">
                 {isAuthenticated ? "Mi Cuenta" : "Iniciar sesión"}
               </Link>
+              <Link to="/service" className="p-2 text-[#1d1d1f] hover:text-[#a5be31] transition-colors flex items-center justify-center" aria-label="Soporte Técnico">
+                <span className="material-symbols-outlined text-[24px] md:text-[22px]">build</span>
+              </Link>
               <Link to="/cart" className="relative flex items-center justify-center p-2 text-[#1d1d1f] hover:text-[#a5be31] transition-colors" onClick={() => setIsMenuOpen(false)}>
                 <span className="material-symbols-outlined text-[24px] md:text-[22px]">shopping_bag</span>
                 {items.length > 0 && (
