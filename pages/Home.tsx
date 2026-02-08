@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CategoryBrowser from '../components/CategoryBrowser';
+import Hero from '../components/Hero';
 import { fetchCollectionWithProducts } from '../lib/shopify';
 
 // Componente auxiliar para animar elementos cuando entran en pantalla
@@ -131,82 +132,8 @@ const Home: React.FC = () => {
     <div className="flex flex-col w-full overflow-x-hidden bg-white">
       {/* Hero Section */}
       {/* Mobile Design: Image stack + Content below */}
-      <div className="block md:hidden w-full bg-[#f5f5f7]">
-        <img
-          src="/images/hero-new.jpg"
-          alt="Movil Pro Tienda"
-          className="w-full h-auto object-contain shadow-sm"
-        />
-        <div className="px-6 py-8 text-center bg-[#f5f5f7] text-[#1d1d1f] -mt-2 relative z-10">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#a5be31]/20 border border-[#a5be31] text-[#6d8015] font-bold text-[10px] uppercase tracking-widest mb-4 backdrop-blur-md">
-            Garantía Móvil Pro
-          </span>
-          <h1 className="text-4xl font-black mb-4 leading-tight text-[#1d1d1f]">
-            Tecnología <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8ba125] to-[#a5be31]">en tus manos</span>
-          </h1>
-          <p className="text-gray-500 font-medium mb-8 text-sm">
-            Tu destino premium para smartphones y servicio técnico especializado.
-          </p>
-          <div className="flex flex-col gap-3">
-            <Link
-              to="/smartphones"
-              className="inline-flex items-center justify-center gap-2 bg-[#a5be31] text-black px-6 py-3 rounded-xl font-bold text-base shadow-lg w-full active:scale-95 transition-transform"
-            >
-              Ver Catálogo
-              <span className="material-symbols-outlined filled text-[20px]">grid_view</span>
-            </Link>
-            <Link
-              to="/service"
-              className="inline-flex items-center justify-center gap-2 bg-white text-[#1d1d1f] border border-gray-200 px-6 py-3 rounded-xl font-bold text-base shadow-sm w-full active:scale-95 transition-transform hover:bg-gray-50"
-            >
-              Servicio Técnico
-              <span className="material-symbols-outlined text-[20px]">build</span>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Desktop Design: Immersive Background Cover */}
-      <section className="hidden md:block relative w-full h-[550px] overflow-hidden group">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 group-hover:scale-105"
-          style={{ backgroundImage: "url('/images/hero-new.jpg')" }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent"></div>
-        </div>
-
-        <div className="relative z-10 h-full max-w-[1200px] mx-auto px-6 flex flex-col justify-center items-start text-[#1d1d1f]">
-          <RevealOnScroll>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[#a5be31]/20 border border-[#a5be31] text-[#a5be31] font-bold text-xs uppercase tracking-widest mb-6 backdrop-blur-md">
-              Garantía Móvil Pro
-            </span>
-            <h1 className="text-6xl lg:text-7xl font-black mb-6 leading-tight drop-shadow-lg">
-              Tecnología <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a5be31] to-emerald-400">en tus manos</span>
-            </h1>
-            <p className="text-xl lg:text-2xl font-medium max-w-xl mb-10 text-gray-700 leading-relaxed">
-              Tu destino premium para smartphones, tablets y servicio técnico especializado.
-            </p>
-            <div className="flex gap-4">
-              <Link
-                to="/smartphones"
-                className="inline-flex items-center gap-2 bg-[#a5be31] text-black px-6 py-3 rounded-xl font-bold text-base hover:bg-white hover:scale-105 transition-all shadow-lg"
-              >
-                Ver Catálogo
-                <span className="material-symbols-outlined filled text-[20px]">grid_view</span>
-              </Link>
-              <Link
-                to="/service"
-                className="inline-flex items-center gap-2 bg-white/10 text-white backdrop-blur-md border border-white/20 px-6 py-3 rounded-xl font-bold text-base hover:bg-white/20 transition-all hover:border-white/40"
-              >
-                Servicio Técnico
-                <span className="material-symbols-outlined text-[20px]">build</span>
-              </Link>
-            </div>
-          </RevealOnScroll>
-        </div>
-      </section>
+      {/* Hero Section */}
+      <Hero />
 
 
       {/* Category Browser */}
@@ -250,9 +177,65 @@ const Home: React.FC = () => {
                 </RevealOnScroll>
               ))
             ) : (
-              <div className="col-span-full py-16 text-center bg-gray-50 rounded-3xl">
-                <p className="text-xl font-bold text-gray-400">No hay productos nuevos disponibles por el momento.</p>
-              </div>
+              <>
+                {/* Fallback Hardcoded Products if Fetch Fails or is Empty */}
+                <RevealOnScroll className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-[#f5f5f7] p-10 h-[560px] cursor-pointer shadow-sm hover:shadow-2xl active:shadow-2xl transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]">
+                  <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-2 group-active:-translate-y-0">
+                    <span className="text-xs font-bold text-blue-600 mb-3 block tracking-wide uppercase">NUEVO</span>
+                    <h3 className="text-3xl font-bold text-[#1d1d1f] mb-2">Samsung S25 Ultra</h3>
+                    <p className="text-base text-gray-500 font-medium line-clamp-2 md:max-w-[80%]">Diseño de titanio, nueva cámara y potencia sin límites.</p>
+                    <div className="mt-6">
+                      <Link to="/smartphones/samsung-galaxy-s25-ultra" className="inline-block rounded-xl bg-[#1d1d1f] text-white px-5 py-2 text-sm font-bold hover:bg-[#a5be31] hover:text-black transition-colors">
+                        Ver Detalles
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 h-[75%] flex justify-center items-end pb-12">
+                    <div
+                      className="h-full w-full bg-contain bg-bottom bg-no-repeat transition-transform duration-700 ease-out group-hover:scale-105"
+                      style={{ backgroundImage: "url('/images/samsung-s25-ultra-final.png')" }}
+                    ></div>
+                  </div>
+                </RevealOnScroll>
+
+                <RevealOnScroll delay={100} className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-black p-10 h-[560px] cursor-pointer shadow-sm hover:shadow-2xl active:shadow-2xl transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]">
+                  <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-2 group-active:-translate-y-0 text-white">
+                    <span className="text-xs font-bold text-[#a5be31] mb-3 block tracking-wide uppercase">PREMIUM</span>
+                    <h3 className="text-3xl font-bold mb-2">iPhone 17 <br />Pro Max</h3>
+                    <p className="text-base text-gray-400 font-medium line-clamp-2 md:max-w-[80%]">El iPhone definitivo.</p>
+                    <div className="mt-6">
+                      <Link to="/smartphones/iphone-17-pro-max" className="inline-block rounded-xl bg-white text-black px-5 py-2 text-sm font-bold hover:bg-[#a5be31] transition-colors">
+                        Ver Detalles
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 h-[55%] flex justify-center items-end pb-6">
+                    <div
+                      className="h-full w-full bg-contain bg-bottom bg-no-repeat transition-transform duration-700 ease-out group-hover:scale-105"
+                      style={{ backgroundImage: "url('/images/iphone-17-pro-max.png')" }}
+                    ></div>
+                  </div>
+                </RevealOnScroll>
+
+                <RevealOnScroll delay={200} className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-[#f5f5f7] p-10 h-[560px] cursor-pointer shadow-sm hover:shadow-2xl active:shadow-2xl transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]">
+                  <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-2 group-active:-translate-y-0">
+                    <span className="text-xs font-bold text-orange-500 mb-3 block tracking-wide uppercase">OFERTA</span>
+                    <h3 className="text-3xl font-bold text-[#1d1d1f] mb-2">AirPods Max</h3>
+                    <p className="text-base text-gray-500 font-medium line-clamp-2 md:max-w-[80%]">Sonido de alta fidelidad. Cancelación Activa de Ruido. Magia pura.</p>
+                    <div className="mt-6">
+                      <Link to="/audio/airpods-max" className="inline-block rounded-xl bg-[#1d1d1f] text-white px-5 py-2 text-sm font-bold hover:bg-[#a5be31] hover:text-black transition-colors">
+                        Ver Detalles
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 h-[55%] flex justify-center items-end pb-6">
+                    <div
+                      className="h-full w-full bg-contain bg-bottom bg-no-repeat transition-transform duration-700 ease-out group-hover:scale-105"
+                      style={{ backgroundImage: "url('/images/airpods-max-new.png')" }}
+                    ></div>
+                  </div>
+                </RevealOnScroll>
+              </>
             )}
           </div>
         </div>
@@ -294,16 +277,18 @@ const Home: React.FC = () => {
                     {/* Dynamic discount badge could go here if we had compareAtPrice */}
                     <span className="bg-[#faaf00] text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow-sm">OFERTA</span>
                   </div>
-                  <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6 bg-gray-50 group-hover:bg-[#faaf00]/5 transition-colors duration-500">
+                  <Link to={`/reacondicionados/${product.handle}`} className="block relative aspect-[4/5] rounded-2xl overflow-hidden mb-6 bg-gray-50 group-hover:bg-[#faaf00]/5 transition-colors duration-500 cursor-pointer">
                     <div className="absolute inset-0 bg-gradient-to-tr from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <img
                       src={product.image}
                       alt={product.name}
                       className="w-full h-full object-contain p-6 mix-blend-multiply transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
                     />
-                  </div>
+                  </Link>
                   <div className="space-y-2">
-                    <h3 className="text-lg font-bold text-[#1d1d1f] group-hover:text-[#faaf00] transition-colors line-clamp-1">{product.name}</h3>
+                    <Link to={`/reacondicionados/${product.handle}`}>
+                      <h3 className="text-lg font-bold text-[#1d1d1f] group-hover:text-[#faaf00] transition-colors line-clamp-2 min-h-[3.5rem]">{product.name}</h3>
+                    </Link>
                     <div className="flex items-baseline gap-3">
                       <span className="text-2xl font-black text-[#1d1d1f]">{product.price}</span>
                       {/* Placeholder for compare price */}
@@ -345,10 +330,10 @@ const Home: React.FC = () => {
 
 
         </div>
-      </section>
+      </section >
 
       {/* Accessories Bento Grid - Compact & Expert Tips */}
-      <section className="bg-[#f5f5f7] py-16 px-4 md:px-6">
+      < section className="bg-[#f5f5f7] py-16 px-4 md:px-6" >
         <div className="mx-auto max-w-[1100px]">
           <RevealOnScroll>
             <h2 className="text-3xl md:text-5xl font-black tracking-tight text-[#1d1d1f] mb-8 md:mb-10 text-center md:text-left">Esenciales del Experto.</h2>
@@ -426,10 +411,10 @@ const Home: React.FC = () => {
             </RevealOnScroll>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Global Styles for Animations */}
-      <style>{`
+      < style > {`
         @keyframes slideUp {
           from { opacity: 0; transform: translateY(40px); }
           to { opacity: 1; transform: translateY(0); }
@@ -442,8 +427,8 @@ const Home: React.FC = () => {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-10px); }
         }
-      `}</style>
-    </div>
+      `}</style >
+    </div >
   );
 };
 

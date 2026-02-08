@@ -114,17 +114,70 @@ export const createCheckout = async () => {
 
 export const fetchCollectionWithProducts = async (handle: string) => {
     try {
-        // Fetch collection by handle
-        const collection = await shopifyClient.collection.fetchByHandle(handle);
+        const query = `
+            query getCollection($handle: String!) {
+                collection(handle: $handle) {
+                    id
+                    title
+                    description
+                    products(first: 50) {
+                        edges {
+                            node {
+                                id
+                                title
+                                handle
+                                description
+                                availableForSale
+                                options {
+                                    name
+                                    values
+                                }
+                                images(first: 1) {
+                                  edges {
+                                    node {
+                                      src: url
+                                      altText
+                                    }
+                                  }
+                                }
+                                variants(first: 1) {
+                                    edges {
+                                        node {
+                                            id
+                                            price {
+                                                amount
+                                                currencyCode
+                                            }
+                                            availableForSale
+                                            quantityAvailable
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        `;
+
+        const response = await customShopifyFetch(query, { handle });
+        const collection = response.data?.collection;
+
         if (!collection) {
             console.warn(`Collection not found: ${handle}`);
             return null;
         }
 
-        // Fetch products for this collection (default limit is 20)
-        // Note: fetchByHandle includes products by default, but we can verify or fetch more if needed
-        // The return object from fetchByHandle usually contains a products array
-        return collection;
+        // Map existing structure expected by components
+        return {
+            ...collection,
+            products: collection.products.edges.map((e: any) => ({
+                ...e.node,
+                images: e.node.images.edges.map((img: any) => img.node),
+                variants: e.node.variants.edges.map((v: any) => v.node)
+            }))
+        };
+
     } catch (error) {
         console.error(`Error fetching collection ${handle}:`, error);
         return null;
@@ -576,9 +629,58 @@ export const searchProducts = async (query: string) => {
                 image: node.images.edges[0]?.node?.url || '',
                 available: node.availableForSale
             };
+        }).filter((item: any) => {
+            // Client-side strict filtering: Ensure ALL query terms are present in the title or category
+            const searchTerms = query.toLowerCase().trim().split(/\s+/);
+            const itemText = (item.name + ' ' + item.category).toLowerCase();
+            return searchTerms.every(term => itemText.includes(term));
         });
     } catch (error) {
         console.error('Error searching products:', error);
         return [];
+    }
+};
+export const checkoutLineItemsAdd = async (checkoutId: string, lineItems: { variantId: string, quantity: number }[]) => {
+    try {
+        const mutation = `
+            mutation checkoutLineItemsAdd($checkoutId: ID!, $lineItems: [CheckoutLineItemInput!]!) {
+                checkoutLineItemsAdd(checkoutId: $checkoutId, lineItems: $lineItems) {
+                    checkout {
+                        id
+                        webUrl
+                        lineItems(first: 50) {
+                            edges {
+                                node {
+                                    id
+                                    title
+                                    quantity
+                                }
+                            }
+                        }
+                    }
+                    checkoutUserErrors {
+                        code
+                        field
+                        message
+                    }
+                }
+            }
+        `;
+
+        const response = await customShopifyFetch(mutation, {
+            checkoutId,
+            lineItems
+        });
+
+        const data = response.data;
+
+        if (data?.checkoutLineItemsAdd?.checkoutUserErrors?.length > 0) {
+            throw new Error(data.checkoutLineItemsAdd.checkoutUserErrors[0].message);
+        }
+
+        return data?.checkoutLineItemsAdd?.checkout;
+    } catch (error) {
+        console.error('Error adding items to checkout:', error);
+        throw error;
     }
 };

@@ -1,0 +1,49 @@
+Found 9 collections:
+[AirPods] (handle: airpods)
+   - Product count (sample): 4
+     * AirPods Max
+     * AirPods 4
+     * AirPods Pro 3
+     * AirPods (2.ª generación)
+
+[Apple-Watch] (handle: apple-watch)
+   - Product count (sample): 0
+
+[iPad] (handle: ipad)
+   - Product count (sample): 5
+     * iPad mini A17 Pro
+     * iPad A16
+     * iPad Air 11 M3
+     * iPad Air 13 M3
+     * iPad Pro 11 M4
+
+[MacBook-Air] (handle: macbook-air)
+   - Product count (sample): 0
+
+[MacBook-Pro] (handle: macbook-pro)
+   - Product count (sample): 0
+
+[Samsung] (handle: samsung)
+   - Product count (sample): 2
+     * Samsung Galaxy S25 ULTRA
+     * Samsung Galaxy S24 ULTRA
+
+[Samsung-Buds] (handle: samsung-buds)
+   - Product count (sample): 0
+
+[Iphone] (handle: iphone)
+   - Product count (sample): 5
+     * iPhone 17 Pro Max
+     * iPhone 17 Pro
+     * iPhone 16 Pro Max
+     * iPhone 16 Pro
+     * iPhone 16
+
+[Reacondicionados] (handle: reacondicionados)
+   - Product count (sample): 5
+     * iPhone 16 Pro Max (Semi-nuevo)
+     * iPhone 16 Pro (Semi-nuevo)
+     * iPhone 16 (Semi-nuevo)
+     * iPhone 15 Pro Max (Semi-nuevo)
+     * iPhone 15 Pro (Semi-nuevo)
+

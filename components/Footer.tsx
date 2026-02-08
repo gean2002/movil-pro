@@ -48,10 +48,10 @@ const Footer: React.FC = () => {
               <Link to="/smartphones" className="hover:text-[#1d1d1f] hover:underline transition-colors">Smartphones</Link>
               <Link to="/tablets" className="hover:text-[#1d1d1f] hover:underline transition-colors">Tablets</Link>
               <Link to="/laptops" className="hover:text-[#1d1d1f] hover:underline transition-colors">Computadoras</Link>
-              <Link to="/smartwatchs" className="hover:text-[#1d1d1f] hover:underline transition-colors">Relojes</Link>
+
               <Link to="/audio" className="hover:text-[#1d1d1f] hover:underline transition-colors">Auriculares</Link>
               <Link to="/accessories" className="hover:text-[#1d1d1f] hover:underline transition-colors">Accesorios</Link>
-              <Link to="/promotions" className="hover:text-[#1d1d1f] hover:underline transition-colors font-medium text-[#e63946]">Ofertas</Link>
+              <Link to="/promociones" className="hover:text-[#1d1d1f] hover:underline transition-colors font-medium text-[#e63946]">Promociones</Link>
             </div>
           </div>
 
@@ -132,6 +132,13 @@ const Footer: React.FC = () => {
               <Link to="/legal/returns" className="hover:text-[#1d1d1f] hover:underline transition-colors">Cambios y devoluciones</Link>
               <Link to="/legal/disclaimer" className="hover:text-[#1d1d1f] hover:underline transition-colors">Aviso de Imágenes</Link>
             </div>
+          </div>
+
+          {/* Credits */}
+          <div className="border-t border-[#d2d2d7] mt-8 pt-8 text-center">
+            <p className="text-[10px] text-gray-400">
+              Sitio web creado por <a href="https://digitalab.app" target="_blank" rel="noreferrer" className="text-gray-600 hover:text-black font-semibold transition-colors">DigitaLab.app</a>
+            </p>
           </div>
         </div>
       </div>

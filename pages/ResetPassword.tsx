@@ -62,6 +62,7 @@ const ResetPassword: React.FC = () => {
 
                 <div className="z-10 relative">
                     <div className="text-center mb-10">
+                        <img src="/logo.png" alt="Movil Pro" className="h-12 mx-auto mb-8 object-contain" />
                         <div className="w-16 h-16 bg-[#a5be31]/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <span className="material-symbols-outlined text-[#a5be31] text-3xl">lock_reset</span>
                         </div>

@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import Account from './pages/Account';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import CustomerResetPassword from './pages/CustomerResetPassword';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CategoryListing from './pages/CategoryListing';
@@ -43,7 +44,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     // FIX: Handle cases where email clients strip the '#' from the URL
     useEffect(() => {
         const path = window.location.pathname;
-        if (path.startsWith('/reset-password') && !window.location.hash) {
+        if ((path.startsWith('/reset-password') || path.startsWith('/account/reset')) && !window.location.hash) {
             // Redirect from /reset-password/... to /#/reset-password/...
             window.location.href = `${window.location.origin}/#${path}`;
         }
@@ -71,25 +72,35 @@ const App: React.FC = () => {
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/smartphones" element={<CategoryListing categoryType="smartphones" />} />
-                            <Route path="/reacondicionados" element={<RefurbishedListing />} />
-                            <Route path="/accesorios" element={<AccessoriesListing />} />
+                            <Route path="/reacondicionados" element={<CategoryListing categoryType="reacondicionados" />} />
+                            <Route path="/accesorios" element={<CategoryListing categoryType="accesorios" />} />
+
+                            {/* Product Details - Unified Approach */}
                             <Route path="/smartphones/:handle" element={<ProductDetailNew />} />
                             <Route path="/computadoras/:handle" element={<ProductDetailNew />} />
                             <Route path="/relojes/:handle" element={<ProductDetailNew />} />
                             <Route path="/tablets/:handle" element={<ProductDetailNew />} />
                             <Route path="/audio/:handle" element={<ProductDetailNew />} />
-                            <Route path="/reacondicionados/:brand/:id" element={<ProductDetailRefurb />} />
-                            <Route path="/accesorios/:category/:id" element={<ProductDetailAccessory />} />
+
+                            {/* Refurbished Detail - Simplified Route */}
+                            <Route path="/reacondicionados/:handle" element={<ProductDetailRefurb />} />
+                            {/* Accessories Detail - Simplified Route */}
+                            <Route path="/accesorios/:handle" element={<ProductDetailNew />} />
+
                             <Route path="/cart" element={<Cart />} />
                             <Route path="/checkout" element={<Checkout />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/forgot-password" element={<ForgotPassword />} />
                             <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
+                            <Route path="/account/reset/:id/:token" element={<CustomerResetPassword />} />
+                            <Route path="/account/reset" element={<CustomerResetPassword />} />
                             <Route path="/account" element={<Account />} />
 
                             {/* Subcategory Routes */}
                             <Route path="/smartphones/iphone" element={<CategoryListing categoryType="iphone" />} />
                             <Route path="/smartphones/samsung" element={<CategoryListing categoryType="samsung" />} />
+
+                            <Route path="/reacondicionados/iphone" element={<CategoryListing categoryType="reacondicionados-iphone" />} />
 
                             <Route path="/tablets" element={<CategoryListing categoryType="tablets" />} />
                             <Route path="/tablets/ipad" element={<CategoryListing categoryType="ipad" />} />
@@ -100,11 +111,9 @@ const App: React.FC = () => {
 
                             <Route path="/relojes" element={<CategoryListing categoryType="relojes" />} />
                             <Route path="/relojes/apple-watch" element={<CategoryListing categoryType="apple-watch" />} />
-                            <Route path="/relojes/galaxy-watch" element={<CategoryListing categoryType="galaxy-watch" />} />
 
                             <Route path="/audio" element={<CategoryListing categoryType="audio" />} />
                             <Route path="/audio/airpods" element={<CategoryListing categoryType="airpods" />} />
-                            <Route path="/audio/samsung-buds" element={<CategoryListing categoryType="samsung-buds" />} />
 
                             <Route path="/promociones" element={<CategoryListing categoryType="promociones" />} />
 

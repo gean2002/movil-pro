@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useAuth } from './AuthContext';
 
 export interface CartItem {
   id: string;
@@ -23,7 +24,39 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+
+  const { user } = useAuth();
   const [items, setItems] = useState<CartItem[]>([]);
+
+  // Determine storage key
+  const getStorageKey = () => {
+    if (user && user.email) {
+      return `cart_${user.email}`;
+    }
+    return 'cart_guest';
+  };
+
+  // Load items from local storage whenever the user changes (or on mount)
+  useEffect(() => {
+    const key = getStorageKey();
+    const storedItems = localStorage.getItem(key);
+    if (storedItems) {
+      try {
+        setItems(JSON.parse(storedItems));
+      } catch (error) {
+        console.error('Failed to parse cart items:', error);
+        setItems([]);
+      }
+    } else {
+      setItems([]);
+    }
+  }, [user]); // Re-run when user changes
+
+  // Save items to local storage whenever items change
+  useEffect(() => {
+    const key = getStorageKey();
+    localStorage.setItem(key, JSON.stringify(items));
+  }, [items, user]);
 
   // Calculate total price
   const cartTotal = items.reduce((total, item) => total + item.price, 0);

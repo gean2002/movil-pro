@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import AnnouncementBar from './AnnouncementBar';
@@ -37,15 +37,7 @@ const navLinks = [
     path: '/computadoras',
     subcategories: [
       { name: 'MacBook Air', path: '/computadoras/macbook-air' },
-      { name: 'MacBook Pro', path: '/computadoras/macbook-pro' },
-    ]
-  },
-  {
-    name: 'RELOJES',
-    path: '/relojes',
-    subcategories: [
-      { name: 'Apple Watch', path: '/relojes/apple-watch' },
-      { name: 'Samsung Galaxy Watch', path: '/relojes/galaxy-watch' },
+
     ]
   },
   {
@@ -53,7 +45,6 @@ const navLinks = [
     path: '/audio',
     subcategories: [
       { name: 'AirPods', path: '/audio/airpods' },
-      { name: 'Samsung Buds', path: '/audio/samsung-buds' },
     ]
   },
   {
@@ -72,8 +63,9 @@ const navLinks = [
 
 const Navbar: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { items } = useCart();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -92,6 +84,11 @@ const Navbar: React.FC = () => {
   };
 
   const getLinkClass = (path: string) => {
+    if (path === '/promociones') {
+      return isActive(path)
+        ? "text-[rgb(239,68,68)] text-sm md:text-xs font-bold transition-colors"
+        : "text-[rgb(239,68,68)] hover:text-red-700 text-sm md:text-xs font-medium transition-colors";
+    }
     return isActive(path)
       ? "text-black text-sm md:text-xs font-bold transition-colors"
       : "text-[#86868b] hover:text-black text-sm md:text-xs font-medium transition-colors";
@@ -138,6 +135,15 @@ const Navbar: React.FC = () => {
 
   const handleSearchClose = () => {
     setIsSearchOpen(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      if (searchResults.length > 0) {
+        navigate(searchResults[0].link);
+        handleSearchClose();
+      }
+    }
   };
 
   return (
@@ -211,8 +217,12 @@ const Navbar: React.FC = () => {
                 <span className="material-symbols-outlined text-[24px] md:text-[22px]">search</span>
               </button>
 
+              <Link to="/service" className="p-2 text-[#1d1d1f] hover:text-[#a5be31] transition-colors flex items-center justify-center" aria-label="Soporte Técnico">
+                <span className="material-symbols-outlined text-[24px] md:text-[22px]">support_agent</span>
+              </Link>
+
               <Link to={isAuthenticated ? "/account" : "/login"} className="hidden sm:flex text-[11px] font-bold text-[#1d1d1f] hover:text-black uppercase tracking-wide">
-                {isAuthenticated ? "Mi Cuenta" : "Iniciar sesión"}
+                {isAuthenticated ? (user ? user.firstName : "Mi Cuenta") : "Iniciar sesión"}
               </Link>
               <Link to="/cart" className="relative flex items-center justify-center p-2 text-[#1d1d1f] hover:text-[#a5be31] transition-colors" onClick={() => setIsMenuOpen(false)}>
                 <span className="material-symbols-outlined text-[24px] md:text-[22px]">shopping_bag</span>
@@ -238,6 +248,7 @@ const Navbar: React.FC = () => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
                 placeholder="Buscar iPhone, fundas, cargadores..."
                 className="flex-1 bg-transparent text-2xl md:text-3xl font-bold text-[#1d1d1f] placeholder-gray-300 outline-none border-none p-0 focus:ring-0"
               />
@@ -372,7 +383,7 @@ const Navbar: React.FC = () => {
             <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Cuenta</span>
             <Link to={isAuthenticated ? "/account" : "/login"} className="flex items-center gap-3 text-lg font-bold text-[#1d1d1f]" onClick={toggleMenu}>
               <span className="material-symbols-outlined">account_circle</span>
-              {isAuthenticated ? "Mi Cuenta" : "Iniciar sesión"}
+              {isAuthenticated ? (user ? user.firstName : "Mi Cuenta") : "Iniciar sesión"}
             </Link>
             <Link to="/cart" className="flex items-center gap-3 text-lg font-bold text-[#1d1d1f]" onClick={toggleMenu}>
               <span className="material-symbols-outlined">shopping_cart</span>

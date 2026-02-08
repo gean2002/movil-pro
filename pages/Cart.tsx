@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { shopifyClient, associateCustomerToCheckout } from '../lib/shopify';
 
 const Cart: React.FC = () => {
-  const { items, removeFromCart, cartTotal } = useCart();
+  const { items, removeFromCart, cartTotal, clearCart } = useCart();
   const { token, isAuthenticated } = useAuth();
 
   // UI States
@@ -136,6 +136,7 @@ const Cart: React.FC = () => {
       }
 
       if (targetWebUrl) {
+        clearCart();
         window.location.href = targetWebUrl;
       } else {
         alert('Error generando link de pago.');
